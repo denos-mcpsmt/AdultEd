@@ -1,0 +1,27 @@
+# docker-compose.yml
+
+version: '3'
+
+services:
+  backend:
+    build: ./adult-education-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./adult-education-backend:/app
+    networks:
+      - app-network
+
+  frontend:
+    build: ./adult-education-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./adult-education-frontend:/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
